@@ -1,0 +1,21 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  init:
+    cmds:
+      - brew install pipx
+      - pipx ensurepath
+      - pipx install poetry
+      - poetry install
+  format:
+    cmds:
+      - poetry run black --line-length 80 vitara/
+  lint:
+    cmds:
+      - poetry run pylint --rcfile pylintrc --indent-string "    " vitara/
+      - poetry run black --line-length 80 vitara/ --check
+  # test:
+  #   cmds:
+  #     - poetry run python -m pytest
